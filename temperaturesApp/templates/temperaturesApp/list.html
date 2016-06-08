@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Temperature readings</title>
+  </head>
+  <body>
+    <table>
+        <thead>
+            <tr>
+                <th> time </th>
+                <th> temperature </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for r in readings %}
+            <tr>
+                <td> {{ r.timestamp|date:"Y-m-d H:i:s" }} </td>
+                <td> {{ r.tmp }} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br/>
+    <div class='pagination'>
+        <span class='prev-page'
+            {% if not readings.has_previous %}
+                style='visibility: hidden'
+            {% endif %}
+        >
+      <a 
+        {% if readings.has_previous %}
+        href='?page={{ readings.previous_page_number }}'
+        {% else %}
+        href=''
+        {% endif %}
+      >« previous</a>
+    </span>
+
+    <span class='current-page'>
+      Page {{ readings.number }} of {{ readings.paginator.num_pages }}
+    </span>
+
+    <span class='next-page' 
+      {% if not readings.has_next %}
+      style='visibility: hidden;'
+      {% endif %}
+    >
+      <a 
+        {% if readings.has_next %}
+        href='?page={{ readings.next_page_number }}'
+        {% else %}
+        href=''
+        {% endif %}
+      >next »</a>
+    </span>
+
+    </div>
+  </body>
+</html>

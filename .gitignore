@@ -1,0 +1,6 @@
+my/
+scripts/
+db.sqlite3
+temperatures/settings_secret.py
+*.pyc
+
